@@ -3,6 +3,7 @@ from peewee import *
 from argon2 import PasswordHasher
 from itsdangerous import URLSafeTimedSerializer as Serializer, BadSignature, SignatureExpired
 import config
+from secret_key import SECRET_KEY
 
 HASHER = PasswordHasher()
 
@@ -31,7 +32,7 @@ class User(Model):
     
     @staticmethod
     def verify_auth_token(token, max_age=3600):
-        serializer = Serializer(config.SECRET_KEY)
+        serializer = Serializer(SECRET_KEY)
         try:
             data = serializer.loads(token, max_age=max_age)
         except (SignatureExpired, BadSignature):
