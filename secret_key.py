@@ -1,1 +1,1 @@
-SECRET_KEY = 'test'
+SECRET_KEY = 'your key here'
